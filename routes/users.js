@@ -1,0 +1,18 @@
+/* eslint-disable linebreak-style */
+const router = require('express').Router();
+const { celebrate, Joi } = require('celebrate');
+const urlRegEx = require('../utils/urlValidation');
+
+const {
+  updateUser, getCurrentUser,
+} = require('../controllers/users');
+
+router.get('/users/me', getCurrentUser);
+router.patch('/users/me', celebrate({
+  body: Joi.object().keys({
+    name: Joi.string().min(2).max(30),
+    about: Joi.string().min(2).max(30),
+  }),
+}), updateUser);
+
+module.exports = router;
