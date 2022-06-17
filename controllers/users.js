@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 // eslint-disable-next-line linebreak-style
-//const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 require('dotenv').config();
@@ -58,8 +58,6 @@ module.exports.updateUser = async (req, res, next) => {
   }
 };
 
-/*
-
 module.exports.login = async (req, res, next) => {
   const { email, password } = req.body;
   try {
@@ -69,7 +67,6 @@ module.exports.login = async (req, res, next) => {
     next(new UnauthorizedError('Неверный логин или пароль'));
   }
 };
-*/
 
 module.exports.getCurrentUser = (req, res, next) => {
   const { _id } = req.user;

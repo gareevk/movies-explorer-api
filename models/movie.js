@@ -3,16 +3,6 @@ const mongoose = require('mongoose');
 const urlRegEx = require('../utils/urlValidation');
 
 const movieSchema = new mongoose.Schema({
-  nameRU: {
-    type: String,
-    required: true,
-    validate: /[\w?!,.а-яё0-9\s]+/ig,
-  },
-  nameEN: {
-    type: String,
-    required: true,
-    validate: /[\w?!,.a-z0-9\s]+/ig,
-  },
   country: {
     type: String,
     required: true,
@@ -38,10 +28,20 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: urlRegEx,
   },
-  trailerLink: {
+  trailer: {
     type: String,
     required: true,
     validate: urlRegEx,
+  },
+  nameRU: {
+    type: String,
+    required: true,
+    validate: /[\w?!,.а-яё0-9\s]+/ig,
+  },
+  nameEN: {
+    type: String,
+    required: true,
+    validate: /[\w?!,.a-z0-9\s]+/ig,
   },
   thumbnail: {
     type: String,
@@ -54,7 +54,8 @@ const movieSchema = new mongoose.Schema({
     required: true,
   },
   movieId: {
-
+    type: String,
+    required: true,
   },
 });
 
