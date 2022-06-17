@@ -48,6 +48,7 @@ module.exports.createMovie = async (req, res, next) => {
       next(new ConflictError('Такой фильм уже существует'));
       return;
     }
+    const owner = req.user._id;
     const newMovie = await Movie.create({
       country: country,
       director: director,
