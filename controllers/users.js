@@ -39,11 +39,12 @@ module.exports.createUser = async (req, res, next) => {
 };
 
 module.exports.updateUser = async (req, res, next) => {
+  console.log(req.user._id);
   try {
-    const { name, about } = req.body;
+    const { name, email } = req.body;
     const updatedUser = await User.findByIdAndUpdate(
       req.user._id,
-      { name, about },
+      { name, email },
       { new: true, runValidators: true },
     );
     res.status(200).send({ data: updatedUser });
