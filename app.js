@@ -1,11 +1,11 @@
-/* eslint-disable linebreak-style */
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const { celebrate, Joi } = require('celebrate');
 const auth = require('./middlewares/auth');
-const { login, createUser } = require('./controllers/users');
+const { createUser } = require('./middlewares/register');
+const { login } = require('./middlewares/login');
 const NotFoundError = require('./middlewares/NotFoundError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { corsValidation } = require('./middlewares/corsValidation');
@@ -51,13 +51,12 @@ app.use('*', (req, res, next) => {
 app.use(errorLogger);
 app.use(errors());
 
-// eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   const { statusCode = 500 } = err;
   res.status(statusCode).send({ message: err.message });
+  next();
 });
 
 app.listen(PORT, () => {
-  // eslint-disable-next-line no-console
   console.log(`http://localhost:${PORT}`);
 });
