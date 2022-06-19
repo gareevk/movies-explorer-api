@@ -20,12 +20,11 @@ router.post('/movies', celebrate({
     year: Joi.string().required().min(4).max(4),
     description: Joi.string().required().min(2),
     image: Joi.string().required().pattern(urlRegEx),
-    trailer: Joi.string().required().pattern(urlRegEx),
-    nameRU: Joi.string().required().min(2).pattern(/[\w?!,.а-яё0-9\s]+/i),
-    nameEN: Joi.string().required().min(2).pattern(/[\w?!,.a-z0-9\s]+/i),
-    link: Joi.string().required().pattern(urlRegEx),
+    trailerLink: Joi.string().required().pattern(urlRegEx),
     thumbnail: Joi.string().required().pattern(urlRegEx),
     movieId: Joi.string().required().min(2),
+    nameRU: Joi.string().required().min(2).pattern(/[\w?!,.а-яё0-9\s]+/i),
+    nameEN: Joi.string().required().min(2).pattern(/[\w?!,.a-z0-9\s]+/i),
   }),
 }), createMovie);
 
