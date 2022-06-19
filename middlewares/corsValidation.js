@@ -1,8 +1,5 @@
-/* eslint-disable object-shorthand */
-/* eslint-disable linebreak-style */
 const allowedCors = require('../utils/allowedCors');
 
-// eslint-disable-next-line consistent-return
 module.exports.corsValidation = (req, res, next) => {
   const { origin } = req.headers;
   const { method } = req;

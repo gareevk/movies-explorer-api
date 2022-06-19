@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const UnauthorizedError = require('./UnauthorizedError');

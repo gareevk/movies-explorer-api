@@ -1,8 +1,6 @@
-/* eslint-disable linebreak-style */
 const mongoose = require('mongoose');
 const isEmail = require('validator/lib/isEmail');
 const bcrypt = require('bcryptjs');
-//const urlRegEx = require('../utils/urlValidation');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -27,7 +25,6 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-// eslint-disable-next-line func-names
 userSchema.statics.findUserByCredentials = function (email, password) {
   return this.findOne({ email }).select('+password')
     .then((user) => {

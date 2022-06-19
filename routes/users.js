@@ -1,7 +1,5 @@
-/* eslint-disable linebreak-style */
 const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
-const urlRegEx = require('../utils/urlValidation');
 
 const {
   updateUser, getCurrentUser,
