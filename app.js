@@ -3,9 +3,10 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const { celebrate, Joi } = require('celebrate');
+const helmet = require('helmet');
 const auth = require('./middlewares/auth');
-const { createUser } = require('./middlewares/register');
-const { login } = require('./middlewares/login');
+const { createUser } = require('./middlewares/Register');
+const { login } = require('./middlewares/SignIn');
 const NotFoundError = require('./middlewares/NotFoundError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { corsValidation } = require('./middlewares/corsValidation');
@@ -23,6 +24,8 @@ mongoose.connect(process.env.MONGODB_URL);
 app.use(express.json());
 
 app.use(requestLogger);
+
+app.use(helmet());
 
 app.post('/signup', celebrate({
   body: Joi.object().keys({

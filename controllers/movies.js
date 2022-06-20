@@ -4,6 +4,7 @@ const BadRequestError = require('../middlewares/BadRequestError');
 const NotFoundError = require('../middlewares/NotFoundError');
 const ForbiddenError = require('../middlewares/ForbiddenError');
 const ConflictError = require('../middlewares/ConflictError');
+const error = require('../utils/constants');
 
 module.exports.getMovies = (req, res, next) => {
   Movie.find({})
@@ -16,16 +17,16 @@ module.exports.getMovies = (req, res, next) => {
 module.exports.deleteMovie = async (req, res, next) => {
   try {
     if (req.params.movieId.length !== 24 || !ObjectId.isValid(req.params.movieId)) {
-      next(new BadRequestError('Передан некорректный id фильма'));
+      next(new BadRequestError(error.incorrectMovieId));
       return;
     }
     const deleteMovie = await Movie.findById(req.params.movieId);
     if (!deleteMovie) {
-      next(new NotFoundError('Фильм не найден'));
+      next(new NotFoundError(error.movieNotFoundError));
       return;
     }
     if (!deleteMovie.owner.toString().includes(req.user._id)) {
-      next(new ForbiddenError('У вас нет прав на удаление данного фильма'));
+      next(new ForbiddenError(error.movieDeletePermissionError));
       return;
     }
     await Movie.findByIdAndRemove(req.params.movieId);
@@ -52,7 +53,7 @@ module.exports.createMovie = async (req, res, next) => {
     } = req.body;
     const movieValidation = await Movie.findOne({ movieId });
     if (movieValidation) {
-      next(new ConflictError('Такой фильм уже существует'));
+      next(new ConflictError(error.movieExistsError));
       return;
     }
     const owner = req.user._id;
@@ -73,7 +74,7 @@ module.exports.createMovie = async (req, res, next) => {
     res.status(200).send({ data: newMovie });
   } catch (err) {
     if (err.name === 'ValidationError') {
-      next(new BadRequestError('Переданы некорректные данные'));
+      next(new BadRequestError(error.incorrectInputError));
       return;
     }
     next(err);

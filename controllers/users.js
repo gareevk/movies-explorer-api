@@ -2,6 +2,7 @@ const User = require('../models/user');
 require('dotenv').config();
 const BadRequestError = require('../middlewares/BadRequestError');
 const ConflictError = require('../middlewares/ConflictError');
+const error = require('../utils/constants');
 
 module.exports.updateUser = async (req, res, next) => {
   console.log(req.user._id);
@@ -9,7 +10,7 @@ module.exports.updateUser = async (req, res, next) => {
     const { name, email } = req.body;
     const userValidation = await User.findOne({ email });
     if (userValidation) {
-      next(new ConflictError('Пользователь с таким email уже существует'));
+      next(new ConflictError(error.emailExistsError));
       return;
     }
     const updatedUser = await User.findByIdAndUpdate(
@@ -20,7 +21,7 @@ module.exports.updateUser = async (req, res, next) => {
     res.status(200).send({ data: updatedUser });
   } catch (err) {
     if (err.name === 'ValidationError') {
-      next(new BadRequestError('Переданы некорректные данные'));
+      next(new BadRequestError(error.incorrectInputError));
     }
     next(err);
   }
@@ -31,7 +32,7 @@ module.exports.getCurrentUser = (req, res, next) => {
   User.findById(_id)
     .then((user) => {
       if (!user) {
-        next(new BadRequestError('Пользователь не найден'));
+        next(new BadRequestError(error.userNotFoundError));
         return;
       }
       res.status(200).send({ data: user });
@@ -39,7 +40,7 @@ module.exports.getCurrentUser = (req, res, next) => {
     .catch((err) => {
       console.log(err.name);
       if (err.name === 'CastError') {
-        next(new BadRequestError('Передан некорректный id пользователя'));
+        next(new BadRequestError(error.incorrectUserIdError));
       }
       next(err);
     });
