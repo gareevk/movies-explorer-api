@@ -5,7 +5,6 @@ const ConflictError = require('../middlewares/ConflictError');
 const error = require('../utils/constants');
 
 module.exports.updateUser = async (req, res, next) => {
-  console.log(req.user._id);
   try {
     const { name, email } = req.body;
     const userValidation = await User.findOne({ email });

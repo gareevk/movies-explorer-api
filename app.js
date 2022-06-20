@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
-const { celebrate, Joi } = require('celebrate');
+require('dotenv').config();
 const helmet = require('helmet');
 const auth = require('./middlewares/auth');
 const { createUser } = require('./middlewares/Register');
@@ -10,6 +10,8 @@ const { login } = require('./middlewares/SignIn');
 const NotFoundError = require('./middlewares/NotFoundError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { corsValidation } = require('./middlewares/corsValidation');
+const { createUserValidation, loginValidation } = require('./middlewares/validation');
+const error = require('./utils/constants');
 
 const { PORT = 3000 } = process.env;
 const app = express();
@@ -27,27 +29,16 @@ app.use(requestLogger);
 
 app.use(helmet());
 
-app.post('/signup', celebrate({
-  body: Joi.object().keys({
-    name: Joi.string().min(2).max(30).required(),
-    email: Joi.string().email().required(),
-    password: Joi.string().required(),
-  }),
-}), createUser);
+app.post('/signup', createUserValidation, createUser);
 
-app.post('/signin', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().email().required(),
-    password: Joi.string().required(),
-  }),
-}), login);
+app.post('/signin', loginValidation, login);
 
 app.use(auth);
 
 app.use('/', require('./routes/index'));
 
 app.use('*', (req, res, next) => {
-  next(new NotFoundError('Такой страницы не существует'));
+  next(new NotFoundError(error.pageNotFoundError));
 });
 
 app.use(errorLogger);
