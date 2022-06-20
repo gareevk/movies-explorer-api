@@ -18,7 +18,7 @@ app.use(corsValidation);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect('mongodb://localhost:27017/moviesdb');
+mongoose.connect(process.env.MONGODB_URL);
 
 app.use(express.json());
 
@@ -26,7 +26,7 @@ app.use(requestLogger);
 
 app.post('/signup', celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
+    name: Joi.string().min(2).max(30).required(),
     email: Joi.string().email().required(),
     password: Joi.string().required(),
   }),
