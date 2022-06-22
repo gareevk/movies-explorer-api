@@ -14,6 +14,7 @@ const { createUserValidation, loginValidation } = require('./middlewares/validat
 const error = require('./utils/constants');
 
 const { PORT = 3000 } = process.env;
+const { MONGODB_URL = 'mongodb://localhost:27017/moviesdb' } = process.env;
 const app = express();
 
 app.use(corsValidation);
@@ -21,7 +22,7 @@ app.use(corsValidation);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect(process.env.MONGODB_URL);
+mongoose.connect(MONGODB_URL);
 
 app.use(express.json());
 
