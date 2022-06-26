@@ -1,4 +1,4 @@
-const { ObjectId } = require('mongoose').Types.ObjectId;
+const ObjectId = require('objectid');
 const Movie = require('../models/movie');
 const BadRequestError = require('../middlewares/BadRequestError');
 const NotFoundError = require('../middlewares/NotFoundError');
