@@ -3,8 +3,6 @@ const allowedCors = require('../utils/allowedCors');
 module.exports.corsValidation = (req, res, next) => {
   const { origin } = req.headers;
   const { method } = req;
-  console.log(origin);
-  console.log(method);
   const requestHeaders = req.headers['access-control-request-headers'];
   const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
 
@@ -19,5 +17,5 @@ module.exports.corsValidation = (req, res, next) => {
     res.header('Access-Control-Allow-Origin', origin);
   }
 
-  next();
+  return next();
 };

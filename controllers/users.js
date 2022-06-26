@@ -37,7 +37,6 @@ module.exports.getCurrentUser = (req, res, next) => {
       res.status(200).send({ data: user });
     })
     .catch((err) => {
-      console.log(err.name);
       if (err.name === 'CastError') {
         next(new BadRequestError(error.incorrectUserIdError));
       }
