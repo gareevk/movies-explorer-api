@@ -1,7 +1,7 @@
 const User = require('../models/user');
 require('dotenv').config();
-const BadRequestError = require('../middlewares/BadRequestError');
-const ConflictError = require('../middlewares/ConflictError');
+const BadRequestError = require('../errors/BadRequestError');
+const ConflictError = require('../errors/ConflictError');
 const error = require('../utils/constants');
 
 module.exports.updateUser = async (req, res, next) => {

@@ -1,4 +1,4 @@
-const allowedCors = require('../utils/allowedCors');
+const { allowedCors } = require('../utils/constants');
 
 module.exports.corsValidation = (req, res, next) => {
   const { origin } = req.headers;

@@ -1,9 +1,9 @@
 const ObjectId = require('objectid');
 const Movie = require('../models/movie');
-const BadRequestError = require('../middlewares/BadRequestError');
-const NotFoundError = require('../middlewares/NotFoundError');
-const ForbiddenError = require('../middlewares/ForbiddenError');
-const ConflictError = require('../middlewares/ConflictError');
+const BadRequestError = require('../errors/BadRequestError');
+const NotFoundError = require('../errors/NotFoundError');
+const ForbiddenError = require('../errors/ForbiddenError');
+const ConflictError = require('../errors/ConflictError');
 const error = require('../utils/constants');
 
 module.exports.getMovies = (req, res, next) => {

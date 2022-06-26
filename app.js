@@ -4,13 +4,10 @@ const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 require('dotenv').config();
 const helmet = require('helmet');
-const NotFoundError = require('./middlewares/NotFoundError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { PORT, MONGODB_URL } = require('./utils/config');
 const { corsValidation } = require('./middlewares/corsValidation');
-const error = require('./utils/constants');
 
-const { PORT = 3000 } = process.env;
-const { MONGODB_URL = 'mongodb://localhost:27017/moviesdb' } = process.env;
 const app = express();
 
 app.use(corsValidation);
@@ -27,10 +24,6 @@ app.use(requestLogger);
 app.use(helmet());
 
 app.use(require('./routes/index'));
-
-app.use('*', (req, res, next) => {
-  next(new NotFoundError(error.pageNotFoundError));
-});
 
 app.use(errorLogger);
 app.use(errors());
