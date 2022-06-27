@@ -1,3 +1,3 @@
 # movies-explorer-api
 
-backend server is here: moviester.nomoreparties.sbs
+backend server is here: https://moviester.nomoreparties.sbs
