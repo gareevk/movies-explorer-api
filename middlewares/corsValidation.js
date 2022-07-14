@@ -17,5 +17,5 @@ module.exports.corsValidation = (req, res, next) => {
     res.header('Access-Control-Allow-Origin', origin);
   }
 
-  return next();
+  next();
 };
