@@ -18,6 +18,7 @@ const urlRegEx = /^(http|https):\/\/(www\.)?[-a-zA-Z0-9@:%_.~#?&=]{2,256}\.[a-z]
 const allowedCors = [
   'http://localhost:3001',
   'http://localhost:3000',
+  'http://movie-explorer.nomoreparties.sbs',
 ];
 
 module.exports = { error, urlRegEx, allowedCors };
