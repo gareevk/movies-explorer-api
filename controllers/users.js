@@ -1,19 +1,11 @@
 const User = require('../models/user');
 require('dotenv').config();
 const BadRequestError = require('../errors/BadRequestError');
-const ConflictError = require('../errors/ConflictError');
 const error = require('../utils/constants');
 
 module.exports.updateUser = async (req, res, next) => {
   try {
     const { name, email } = req.body;
-    /*
-    const userValidation = await User.findOne({ email });
-    if (userValidation) {
-      next(new ConflictError(error.emailExistsError));
-      return;
-    }
-    */
     const updatedUser = await User.findByIdAndUpdate(
       req.user._id,
       { name, email },
