@@ -9,7 +9,7 @@ const auth = require('../middlewares/auth');
 const NotFoundError = require('../errors/NotFoundError');
 const error = require('../utils/constants');
 
-router.use(limiter);
+//router.use(limiter);
 
 router.post('/signup', createUserValidation, createUser);
 router.post('/signin', loginValidation, login);
