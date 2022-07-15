@@ -6,6 +6,7 @@ module.exports.corsValidation = (req, res, next) => {
   const requestHeaders = req.headers['access-control-request-headers'];
   const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
 
+  console.log(method);
   if (method === 'OPTIONS') {
     res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
     res.header('Access-Control-Allow-Headers', requestHeaders);
@@ -13,6 +14,7 @@ module.exports.corsValidation = (req, res, next) => {
     return res.end();
   }
 
+  console.log(allowedCors.includes(origin));
   if (allowedCors.includes(origin)) {
     console.log(allowedCors.includes(origin));
     res.header('Access-Control-Allow-Origin', origin);
