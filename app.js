@@ -12,6 +12,7 @@ const { PORT, MONGODB_URL } = require('./utils/config');
 const app = express();
 
 //app.use(corsValidation);
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -23,8 +24,6 @@ app.use(express.json());
 app.use(requestLogger);
 
 app.use(helmet());
-
-app.use(cors());
 
 app.use(require('./routes/index'));
 
