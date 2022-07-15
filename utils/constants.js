@@ -20,6 +20,7 @@ const allowedCors = [
   'http://localhost:3000',
   'http://movie-explorer.nomoreparties.sbs',
   'https://movie-explorer.nomoreparties.sbs',
+  'https://movie-explorer.nomoreparties.sbs/',
 ];
 
 module.exports = { error, urlRegEx, allowedCors };
