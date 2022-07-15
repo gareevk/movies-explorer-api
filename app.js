@@ -4,13 +4,14 @@ const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 require('dotenv').config();
 const helmet = require('helmet');
+const cors = require('cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { PORT, MONGODB_URL } = require('./utils/config');
-const { corsValidation } = require('./middlewares/corsValidation');
+//const { corsValidation } = require('./middlewares/corsValidation');
 
 const app = express();
 
-app.use(corsValidation);
+//app.use(corsValidation);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,6 +23,8 @@ app.use(express.json());
 app.use(requestLogger);
 
 app.use(helmet());
+
+app.use(cors());
 
 app.use(require('./routes/index'));
 
