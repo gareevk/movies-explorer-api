@@ -12,11 +12,10 @@ module.exports.corsValidation = (req, res, next) => {
     res.header('Access-Control-Allow-Origin', origin);
     return res.end();
   }
-  console.log(allowedCors.includes(origin));
 
   if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Origin', '*');
   }
 
-  return next();
+  next();
 };
