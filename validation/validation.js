@@ -18,17 +18,17 @@ const loginValidation = celebrate({
 
 const createMovieValidation = celebrate({
   body: Joi.object().keys({
-    country: Joi.string().required().min(2),
-    director: Joi.string().required().min(2),
+    country: Joi.string().required(),
+    director: Joi.string().required(),
     duration: Joi.number().required(),
     year: Joi.string().required().min(4).max(4),
-    description: Joi.string().required().min(2),
+    description: Joi.string().required(),
     image: Joi.string().required().pattern(urlRegEx),
     trailerLink: Joi.string().required().pattern(urlRegEx),
     thumbnail: Joi.string().required().pattern(urlRegEx),
     movieId: Joi.number().required(),
-    nameRU: Joi.string().required().min(2),
-    nameEN: Joi.string().required().min(2),
+    nameRU: Joi.string().required(),
+    nameEN: Joi.string().required(),
   }),
 });
 

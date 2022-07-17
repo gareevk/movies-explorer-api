@@ -35,12 +35,10 @@ const movieSchema = new mongoose.Schema({
   nameRU: {
     type: String,
     required: true,
-    validate: /[\w?!,.а-яё0-9\s]+/ig,
   },
   nameEN: {
     type: String,
     required: true,
-    validate: /[\w?!,.a-z0-9\s]+/ig,
   },
   thumbnail: {
     type: String,
