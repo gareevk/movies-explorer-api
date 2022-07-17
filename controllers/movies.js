@@ -51,11 +51,13 @@ module.exports.createMovie = async (req, res, next) => {
       thumbnail,
       movieId,
     } = req.body;
+    /*
     const movieValidation = await Movie.findOne({ movieId });
     if (movieValidation) {
       next(new ConflictError(error.movieExistsError));
       return;
     }
+    */
     const owner = req.user._id;
     const newMovie = await Movie.create({
       country,
