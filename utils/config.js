@@ -5,7 +5,7 @@ const {
 
 const limiterConfig = {
   windowMs: 15 * 60 * 100,
-  max: 1000,
+  max: 100000,
   message: 'Слишком много запросов с вашего IP, попробуйте еще раз позже',
 };
 

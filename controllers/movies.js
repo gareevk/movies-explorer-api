@@ -3,7 +3,6 @@ const Movie = require('../models/movie');
 const BadRequestError = require('../errors/BadRequestError');
 const NotFoundError = require('../errors/NotFoundError');
 const ForbiddenError = require('../errors/ForbiddenError');
-const ConflictError = require('../errors/ConflictError');
 const error = require('../utils/constants');
 
 module.exports.getMovies = (req, res, next) => {
@@ -51,13 +50,6 @@ module.exports.createMovie = async (req, res, next) => {
       thumbnail,
       movieId,
     } = req.body;
-    /*
-    const movieValidation = await Movie.findOne({ movieId });
-    if (movieValidation) {
-      next(new ConflictError(error.movieExistsError));
-      return;
-    }
-    */
     const owner = req.user._id;
     const newMovie = await Movie.create({
       country,
